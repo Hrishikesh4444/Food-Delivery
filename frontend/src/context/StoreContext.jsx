@@ -6,8 +6,8 @@ const StoreContextProvider=(props)=>{
 
     const [cartItems,setCartItems]=useState({});
     const [token,setToken]=useState("");
-    //const url="https://food-delivery-backend-p3ea.onrender.com";
-    const url="http://localhost:4000"
+    const url="https://foodiego-backend-4jfl.onrender.com";
+    //const url="http://localhost:4000"
     const [food_list,setFoodList]=useState([]);
 
     const addToCart=async (itemId)=>{
