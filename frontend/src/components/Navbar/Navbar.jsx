@@ -17,7 +17,7 @@ const Navbar = ({ setShowLogin }) => {
     <div>
       <div className="navbar">
         <Link to="/">
-          <img src={assets.logo} alt="" className="logo" />
+          <img src={assets.logo1} alt="" className="logo" />
         </Link>
         <ul className="navbar-menu">
           <Link
@@ -34,13 +34,13 @@ const Navbar = ({ setShowLogin }) => {
           >
             menu
           </a>
-          <a
+          {/* <a
             href="#app-download"
             onClick={() => setMenu("mobile-app")}
             className={menu === "mobile-app" ? "active" : ""}
           >
             mobile-app
-          </a>
+          </a> */}
           <a
             href="#footer"
             onClick={() => setMenu("contact-us")}

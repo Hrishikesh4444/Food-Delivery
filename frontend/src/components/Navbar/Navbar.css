@@ -7,13 +7,35 @@
 .navbar .logo{
     width: 150px;
 }
+
 .navbar-menu {
     display: flex;
     list-style: none;
-    gap: 20px;
-    color: #49557e;
-    font-size: 18px;
+    gap: 25px;
+    font-size: 16px;
+    font-weight: 500;
 }
+
+.navbar-menu a,
+.navbar-menu Link {
+    text-decoration: none;
+    color: #49557e;
+    
+    
+    transition: all 0.3s ease;
+}
+
+.navbar-menu a:hover {
+    
+    color: tomato;
+}
+
+.navbar .active {
+    color: tomato !important;
+     padding-bottom: 2px;
+    border-bottom: 2px solid tomato !important;
+}
+
 .navbar-right {
     display: flex;
     align-items: center;

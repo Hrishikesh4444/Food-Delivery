@@ -1,9 +1,9 @@
 .app-download {
     margin: auto auto;
     margin-top: 100px;
-    font-size: max(2vw,20px);
+    font-size: max(1.3vw,16px);
     text-align: center;
-    font-weight: 500;
+    font-weight:  380;
 }
 .app-download-platforms {
     display: flex;
@@ -12,8 +12,8 @@
     margin-top: 40px;
 }
 .app-download-platforms img {
-    width: max(20vw,120px);
-    max-width: 150px;
+    width: max(18vw,110px);
+    max-width: 140px;
     transition: 0.5s;
     cursor: pointer;
 }

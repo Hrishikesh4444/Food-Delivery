@@ -1,21 +1,25 @@
 .header {
     height: 34vw;
     margin: 30px auto;
-    background:url('/header_img.png') no-repeat;
-    background-size: contain;
+    background: url('/headerImg.png') no-repeat right center;
+    background-size: cover;
+    border-radius: 20px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
+
 .header-contents {
-    position: absolute;
+    position: relative; 
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: flex-start;
     gap: 1.5vw;
-    max-width: 50%;
-    bottom: 10%;
-    left: 6vw;
+    max-width: 45%;
+    margin-left: 6vw;
     animation: fadeIn 3s;
 }
+
 .header-contents h2 {
     font-weight: 500;
     color: white;

@@ -2,7 +2,8 @@ import userModel from "../models/userModel.js";
 import jwt from "jsonwebtoken"
 import bcrypt from "bcrypt"
 import validator from "validator"
-
+import razorpay from "razorpay";
+import orderModel from "../models/orderModel.js";
 
 const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET)
@@ -65,4 +66,75 @@ const registerUser=async(req,res)=>{
 }
 
 
-export {loginUser,registerUser};
+
+// const razorpayInstance = new razorpay({
+  
+//   key_id: process.env.RAZORPAY_KEY_ID,
+//   key_secret: process.env.RAZORPAY_KEY_SECRET,
+// });
+//api to make payment of order using razorpay
+//api to make payment of order using razorpay
+const paymentRazorpay = async (req, res) => {
+  try {
+    const razorpayInstance = new razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
+    const { items, amount, address, userId } = req.body; // from frontend
+
+    const options = {
+      amount: amount * 100, // in paise
+      currency: process.env.CURRENCY,
+      receipt: "temp_receipt_" + Date.now(),
+    };
+
+    const order = await razorpayInstance.orders.create(options);
+
+    // Send back the order and user/order data to frontend
+    res.json({ success: true, order, items, amount, address, userId });
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+const verifyRazorpay = async (req, res) => {
+  try {
+    const { razorpay_order_id, razorpay_payment_id, razorpay_signature, items, amount, address, userId } = req.body;
+
+    const razorpayInstance = new razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+
+    const order_info = await razorpayInstance.orders.fetch(razorpay_order_id);
+
+    if (order_info.status === "paid") {
+      // Save to DB now
+      const newOrder = new orderModel({
+        userId,
+        items,
+        amount,
+        address,
+        payment: true,
+      });
+
+      await newOrder.save();
+
+      res.json({ success: true, message: "Payment Successful" });
+    } else {
+      res.json({ success: false, message: "Payment Failed" });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+
+
+export { loginUser, registerUser, paymentRazorpay, verifyRazorpay };

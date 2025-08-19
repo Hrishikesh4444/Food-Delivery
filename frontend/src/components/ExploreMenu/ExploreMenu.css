@@ -1,54 +1,73 @@
+
 .explore-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  text-align: center;
+  padding: 30px 20px;
 }
+
 .explore-menu h1 {
-    color: #262626;
-    font-weight: 500;
+  font-size: 2rem;
+  margin-bottom: 10px;
 }
+
 .explore-menu-text {
-    max-width: 60%;
-    columns: #808080;
+  max-width: 700px;
+  margin: 0 auto 30px auto;
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.5;
 }
+
+
 .explore-menu-list {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 30px;
-    text-align: center;
-    margin: 20px 0px;
-    overflow-x: scroll;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap; 
 }
-.explore-menu-list::-webkit-scrollbar{
-    display: none;
+
+
+@media (max-width: 768px) {
+  .explore-menu-list {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #bbb transparent;
+  }
+
+  .explore-menu-list::-webkit-scrollbar {
+    height: 6px;
+  }
+  .explore-menu-list::-webkit-scrollbar-thumb {
+    background: #bbb;
+    border-radius: 3px;
+  }
 }
-.explore-menu-list-item img {
-    width: 7.5vw;
-    min-width: 80px;
-    cursor: pointer;
-    border-radius: 50%;
-    transition: 0.2s;
+
+.explore-menu-card {
+  flex: 0 0 auto;
+  min-width: 120px;
+  padding: 12px;
+  border: 2px solid transparent;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
 }
-.explore-menu-list-item p{
-    margin-top: 10px;
-    color: #747474;
-    font-size: max(1.4vw,16px);
-    cursor: pointer;
+
+.explore-menu-card img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 10px;
 }
-.explore-menu hr {
-    margin: 10px 0px;
-    height: 2px;
-    background-color: #e2e2e2;
-    border: none;
+
+.explore-menu-card p {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333;
 }
-.explore-menu-list .active {
-    border: 1px solid tomato;
-    padding: 2px;
-}
-@media (max-width:1050px){
-    .explore-menu-text{
-        max-width: 100%;
-        font-size: 14px;
-    }
+
+.explore-menu-card.active {
+  border-color: #ccc; 
 }

@@ -17,6 +17,10 @@ const userSchema=new mongoose.Schema({
     cartData:{
         type: Object,
         default: {},
+    },
+    cancelled:{
+        type:Boolean,
+        default:false,
     }
 },{
     minimize: false

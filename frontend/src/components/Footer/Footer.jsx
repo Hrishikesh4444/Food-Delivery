@@ -1,41 +1,53 @@
-import React from 'react'
-import './Footer.css';
-import { assets } from '../../assets/assets';
+import React from "react";
+import "./Footer.css";
+import { assets } from "../../assets/assets";
+
 const Footer = () => {
   return (
-    <div className='footer' id="footer">
+    <footer className="footer" id="footer">
       <div className="footer-content">
-        <div className="footer-content-left">
-            <img src={assets.logo} alt="" />
-            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Omnis velit harum iure delectus voluptatibus facere aperiam modi quos. Eaque, voluptates quos. Suscipit adipisci corrupti aliquid placeat eius deleniti, atque fugiat.</p>
-            <div className="footer-social-icons">
-                <img src={assets.facebook_icon} alt="" />
-                <img src={assets.twitter_icon} alt="" />
-                <img src={assets.linkedin_icon} alt="" />
-            </div>
+        {/* Left Section */}
+        <div className="footer-section footer-left">
+          <img src={assets.logo1} alt="Logo" className="footer-logo" />
+          <p>
+            Delicious food delivered at your doorstep. We bring flavors of the
+            world with fresh ingredients and quick service.
+          </p>
+          <div className="footer-social">
+            <img src={assets.facebook_icon} alt="facebook" />
+            <img src={assets.twitter_icon} alt="twitter" />
+            <img src={assets.linkedin_icon} alt="linkedin" />
+          </div>
         </div>
-        <div className="footer-content-center">
-            <h2 style={{color: 'white'}}>COMPANY</h2>
-            <ul>
-                <li>Home</li>
-                <li>About us</li>
-                <li>Delivery</li>
-                <li>Privacy policy</li>
-            </ul>
+
+        {/* Middle Section */}
+        <div className="footer-section footer-links">
+          <h2>Company</h2>
+          <ul>
+            <li>Home</li>
+            <li>About Us</li>
+            <li>Delivery</li>
+            <li>Privacy Policy</li>
+          </ul>
         </div>
-        <div className="footer-content-right">
-            <h2 style={{color: 'white'}}>GET IN TOUCH</h2>
-            <ul>
-                <li>+1-212-456-7890</li>
-                <li>contact@tomato.com</li>
-            </ul>
+
+        {/* Right Section */}
+        <div className="footer-section footer-contact">
+          <h2>Get in Touch</h2>
+          <ul>
+            <li>📞 +1-212-456-7890</li>
+            <li>📧 contact@foodiego.com</li>
+          </ul>
         </div>
       </div>
-      <hr/>
-      <p className='footer-copyright'>Copyright 2024 &copy; Tomato.com - All Right Reserved.</p>
-      
-    </div>
-  )
-}
 
-export default Footer
+      <hr />
+
+      <p className="footer-bottom">
+        © 2025 FoodieGo.com — All Rights Reserved.
+      </p>
+    </footer>
+  );
+};
+
+export default Footer;
