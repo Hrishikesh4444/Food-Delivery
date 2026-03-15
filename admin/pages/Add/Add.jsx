@@ -26,7 +26,7 @@ const Add = ({url}) => {
 
    const onSubmitHandler=async(e)=>{
       e.preventDefault();
-
+      //FormData is used when we want to send 1)text data 2)files (images)
       const formData=new FormData();
       formData.append("name",data.name);
       formData.append("description",data.description);
@@ -56,6 +56,7 @@ const Add = ({url}) => {
           <p>Upload Image</p>
           <label htmlFor="image">
             <img src={image ? URL.createObjectURL(image):assets.upload_area} alt="" />
+            {/* URL.createObjectURL(image) => creates a temporary preview URL for the selected file. */}
           </label>
           <input onChange={(e)=>setImage(e.target.files[0])} type='file' id='image' hidden required/>
         </div>
