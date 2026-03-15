@@ -37,6 +37,14 @@ const PlaceOrder = () => {
       name: "Food Delivery",
       description: "Order Payment",
       order_id: orderData.order.id,
+      
+      //Razorpay sends this response:
+      // res = {
+      //   razorpay_payment_id: "pay_123",
+      //   razorpay_order_id: "order_abc",
+      //   razorpay_signature: "xyz"
+      // }
+      //This function runs after a successful payment.
       handler: async (res) => {
         try {
           const { data } = await axios.post(
@@ -65,6 +73,7 @@ const PlaceOrder = () => {
           navigate("/cart");
         }
       },
+      //This runs if the user closes the payment window without paying.
       modal: {
         ondismiss: function () {
           alert("Payment cancelled");
@@ -72,7 +81,7 @@ const PlaceOrder = () => {
         },
       },
     };
-
+    //Opening Razorpay Popup
     const rzp = new window.Razorpay(options);
     rzp.open();
   };
