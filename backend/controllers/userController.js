@@ -66,13 +66,68 @@ const registerUser=async(req,res)=>{
 }
 
 
-
-// const razorpayInstance = new razorpay({
-  
-//   key_id: process.env.RAZORPAY_KEY_ID,
-//   key_secret: process.env.RAZORPAY_KEY_SECRET,
-// });
-//api to make payment of order using razorpay
+// User clicks "Place Order / Pay"
+//             │
+//             ▼
+// Frontend sends request
+// POST /api/user/payment-razorpay
+//             │
+//             ▼
+// Backend receives orderId
+// Fetch order from database
+//             │
+//             ▼
+// Backend creates Razorpay order
+// razorpayInstance.orders.create(options)
+//             │
+//             ▼
+// Razorpay returns:
+// order.id, amount, currency
+//             │
+//             ▼
+// Backend sends order data to Frontend
+//             │
+//             ▼
+// Frontend opens Razorpay popup
+// (new Razorpay(options).open())
+//             │
+//             ▼
+// User selects payment method
+// UPI / Card / Netbanking
+//             │
+//             ▼
+// User completes payment
+//             │
+//             ▼
+// Razorpay returns payment details
+// razorpay_payment_id
+// razorpay_order_id
+// razorpay_signature
+//             │
+//             ▼
+// Frontend sends verification request
+// POST /api/user/verify-razorpay
+//             │
+//             ▼
+// Backend verifies payment with Razorpay
+// orders.fetch(razorpay_order_id)
+//             │
+//             ▼
+// Is payment status "paid" ?
+//         │        │
+//        YES       NO
+//         │         │
+//         ▼         ▼
+// Update database   Payment Failed
+// payment = true    Redirect to cart
+//         │
+//         ▼
+// Frontend places order
+// POST /api/order/place
+//         │
+//         ▼
+// User redirected to
+// "My Orders" page
 //api to make payment of order using razorpay
 const paymentRazorpay = async (req, res) => {
   try {
@@ -81,7 +136,7 @@ const paymentRazorpay = async (req, res) => {
       key_secret: process.env.RAZORPAY_KEY_SECRET,
     });
 
-    const { items, amount, address, userId } = req.body; // from frontend
+    const { items, amount, address, userId } = req.body; 
 
     const options = {
       amount: amount * 100, // in paise
@@ -89,9 +144,9 @@ const paymentRazorpay = async (req, res) => {
       receipt: "temp_receipt_" + Date.now(),
     };
 
-    const order = await razorpayInstance.orders.create(options);
+    const order = await razorpayInstance.orders.create(options); ///This creates an order in Razorpay.
+    //Think of it as registering a payment request with Razorpay before the user pays.
 
-    // Send back the order and user/order data to frontend
     res.json({ success: true, order, items, amount, address, userId });
   } catch (error) {
     console.log(error);
@@ -100,7 +155,7 @@ const paymentRazorpay = async (req, res) => {
 };
 
 
-
+//api to verify payment This API runs after the user completes payment.
 const verifyRazorpay = async (req, res) => {
   try {
     const { razorpay_order_id, razorpay_payment_id, razorpay_signature, items, amount, address, userId } = req.body;
@@ -111,6 +166,7 @@ const verifyRazorpay = async (req, res) => {
     });
 
     const order_info = await razorpayInstance.orders.fetch(razorpay_order_id);
+      // //This asks Razorpay: "What is the payment status of this order?"
 
     if (order_info.status === "paid") {
       // Save to DB now
