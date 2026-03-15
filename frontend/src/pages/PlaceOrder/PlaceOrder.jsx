@@ -127,7 +127,7 @@ const PlaceOrder = () => {
   return (
     <div className="checkout-container">
       <form className="place-order" onSubmit={placeOrder}>
-        {/* LEFT: Delivery Form */}
+       
         <div className="place-order-left">
           <h2 className="title">Delivery Information</h2>
           <div className="multi-fields">
@@ -210,23 +210,23 @@ const PlaceOrder = () => {
           />
         </div>
 
-        {/* RIGHT: Cart Summary */}
+        
         <div className="place-order-right">
           <div className="cart-summary">
             <h2>Order Summary</h2>
             <div className="summary-details">
               <p>Subtotal</p>
-              <p>${getTotalCartAmount()}</p>
+              <p>₹{getTotalCartAmount()}</p>
             </div>
             <div className="summary-details">
               <p>Delivery Fee</p>
-              <p>${getTotalCartAmount() === 0 ? 0 : 3}</p>
+              <p>₹{getTotalCartAmount() === 0 ? 0 : 3}</p>
             </div>
             <hr />
             <div className="summary-details total">
               <b>Total</b>
               <b>
-                ${getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 3}
+                ₹{getTotalCartAmount() === 0 ? 0 : getTotalCartAmount() + 3}
               </b>
             </div>
             <button type="submit" className="checkout-btn">
