@@ -1,5 +1,5 @@
 
-# Food Delivery Website (MERN Stack)
+# 🍅FoodieGo-Food Ordering Website
 
 A full-stack food delivery web application built using the MERN stack where users can browse food items, add items to cart, place orders, and make secure online payments.
 
